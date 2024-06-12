@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from 'react';
 import EditorJS from '@editorjs/editorjs';
+//@ts-ignore
 import Header from '@editorjs/header';
 //@ts-ignore
 import List from "@editorjs/list";
