@@ -12,6 +12,7 @@ import { Separator } from '@/components/ui/separator'
 import { useConvex } from 'convex/react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export interface TEAM{
     createdBy:string,
@@ -22,6 +23,7 @@ export interface TEAM{
 
 function SideNavTopSection({user,setActiveTeamInfo}:any) {
     const [teamList,setTeamList]=useState<TEAM[]>();
+    const [isLoaded, setIsLoaded] = useState(false)
     const [activeTeam,setActiveTeam]=useState<TEAM>();
     const menu=[
         {
@@ -43,6 +45,7 @@ function SideNavTopSection({user,setActiveTeamInfo}:any) {
     const router=useRouter();
     useEffect(()=>{ 
         activeTeam&&setActiveTeamInfo(activeTeam);
+        activeTeam&&setIsLoaded(true)
     },[activeTeam])
 
 
@@ -68,15 +71,32 @@ function SideNavTopSection({user,setActiveTeamInfo}:any) {
         <div>
                     <Popover>
             <PopoverTrigger>
-                <div>
+               {
+                isLoaded?
+                <>
+                 <div>
                     <div className='flex items-center gap-3 hover:bg-slate-200 p-3 rounded-md cursor-pointer'  >
-
                         <Image src='/logo.png' alt='Eraser' width={40} height={40} />
                         <h2 className='flex gap-2 items-center font-bold text-[17px]'>{activeTeam?.teamNAme}
                         </h2>
                         <ChevronDown />
                     </div>
                 </div>
+                </>
+                :
+                <>
+                 <div>
+                    <div className='flex items-center gap-3 hover:bg-slate-200 p-3 rounded-md cursor-pointer'  >
+
+                        <Image src='/logo.png' alt='Eraser' width={40} height={40} />
+                        <h2 className='flex gap-2 items-center font-bold text-[17px]'>
+                            <Skeleton className="w-[100px] h-[20px] rounded-full"  />
+                        </h2>
+                        <ChevronDown />
+                    </div>
+                </div>
+                </>
+               }
 
             </PopoverTrigger>
             <PopoverContent className='ml-7 p-4'>
@@ -119,11 +139,11 @@ function SideNavTopSection({user,setActiveTeamInfo}:any) {
         </Popover>
 
             {/* ALL file Button */}
-            <Button variant={'outline'}
+            {/* <Button variant={'outline'}
             className='w-full justify-start gap-2 font-bold mt-8 bg-gray-100'
             >
                 <LayoutGrid className='h-5 w-5'/>All Files
-            </Button>
+            </Button> */}
 
         </div>
 

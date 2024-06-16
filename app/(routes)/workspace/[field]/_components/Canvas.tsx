@@ -2,15 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { Excalidraw, MainMenu, WelcomeScreen } from "@excalidraw/excalidraw";
 import {FILE} from '@/app/(routes)/Dashboard/_Components/FileList' ;
 import { useMutation } from 'convex/react';
+
 import { api } from '@/convex/_generated/api';
 function Canvas({onSaveTrigger,fileId,fileData}:{onSaveTrigger:any,fileId:any,fileData:FILE}) {
-  
+    console.log(fileData)
     const [whiteBoardData,setWhiteBoardData]=useState<any>();
     
     const updateWhiteboard=useMutation(api.files.updateWhiteboard)
     useEffect(()=>{
         onSaveTrigger&&saveWhiteboard();
     },[onSaveTrigger])
+
+
     const saveWhiteboard=()=>{
         updateWhiteboard({
             _id:fileId,
@@ -18,6 +21,8 @@ function Canvas({onSaveTrigger,fileId,fileData}:{onSaveTrigger:any,fileId:any,fi
         }).then(resp=>console.log(resp))
     }
     return (
+
+        
     <div style={{ height: "670px" }}>
    {fileData&& <Excalidraw 
     theme='light'
@@ -43,11 +48,17 @@ function Canvas({onSaveTrigger,fileId,fileData}:{onSaveTrigger:any,fileId:any,fi
         </MainMenu>
         <WelcomeScreen>
             <WelcomeScreen.Hints.MenuHint/>
-            <WelcomeScreen.Hints.MenuHint/>
             <WelcomeScreen.Hints.ToolbarHint/>
-            <WelcomeScreen.Center>
-                <WelcomeScreen.Center.MenuItemHelp/>
-            </WelcomeScreen.Center>
+          <WelcomeScreen.Center>
+            <WelcomeScreen.Center.Logo />
+            <WelcomeScreen.Center.Heading>
+              Welcome Screen Heading!
+            </WelcomeScreen.Center.Heading>
+            <WelcomeScreen.Center.Menu>
+              <WelcomeScreen.Center.MenuItemHelp />
+            </WelcomeScreen.Center.Menu>
+          </WelcomeScreen.Center>
+          <WelcomeScreen.Hints.HelpHint/>
         </WelcomeScreen>
         </Excalidraw>}
   </div>

@@ -22,7 +22,7 @@ function workspace({ params }: any) {
     }
     return (
         <div>
-            <WorkspaceHeader onSave={() => setTriggerSave(!triggersave)} />
+            <WorkspaceHeader onSave={() => setTriggerSave(!triggersave)} fileData={fileData}  />
             {/* Workspace layout */}
             <div className='grid grid-cols-1 md:grid-cols-2'>
                 {/* Document */}

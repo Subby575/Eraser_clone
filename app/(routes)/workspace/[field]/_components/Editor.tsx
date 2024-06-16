@@ -8,39 +8,49 @@ import List from "@editorjs/list";
 //@ts-ignore
 import Checklist from '@editorjs/checklist';
 //@ts-ignore
+import Quote from '@editorjs/quote';
+//@ts-ignore
+import Embed from '@editorjs/embed';
+//@ts-ignore
+import RawTool from '@editorjs/raw';
+//@ts-ignore
+import SimpleImage from "@editorjs/simple-image";
+//@ts-ignore
+import LinkTool from '@editorjs/link';
+//@ts-ignore
 import ImageTool from '@editorjs/image';
 import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { toast } from 'sonner';
 import { FILE } from '@/app/(routes)/Dashboard/_Components/FileList';
-const rawDocument={
-    "time" : 1550476186479,
-    "blocks" : [{
-        data:{
-            text:'Document Name',
-            level:2
+const rawDocument = {
+    "time": 1550476186479,
+    "blocks": [{
+        data: {
+            text: 'Document Name',
+            level: 2
         },
-        id:"123",
-        type:'header'
+        id: "123",
+        type: 'header'
     },
     {
-        data:{
-            level:4
+        data: {
+            level: 4
         },
-        id:"1234",
-        type:'header'
+        id: "1234",
+        type: 'header'
     }],
-    "version" : "2.8.1"
-}; 
+    "version": "2.8.1"
+};
 
-function Editor({ onSaveTrigger, fileId,fileData }: {onSaveTrigger:any,fileId:any,fileData:FILE}) {
+function Editor({ onSaveTrigger, fileId, fileData }: { onSaveTrigger: any, fileId: any, fileData: FILE }) {
     const ref = useRef<EditorJS | null>(null);
     const updateDocument = useMutation(api.files.updateDocument)
     const [document, setDocument] = useState(rawDocument);
 
     useEffect(() => {
         if (!ref.current) {
-            fileData&&initEditor();
+            fileData && initEditor();
         }
 
         return () => {
@@ -77,18 +87,46 @@ function Editor({ onSaveTrigger, fileId,fileData }: {onSaveTrigger:any,fileId:an
                     class: Checklist,
                     inlineToolbar: true,
                 },
-                image: {
-                    class: ImageTool,
+                image: SimpleImage,
+                // image: {
+                //     class: ImageTool,
+                //     config: {
+                //         endpoints: {
+                //             byFile: 'http://localhost:8008/uploadFile', // Your backend file uploader endpoint
+                //             byUrl: 'http://localhost:8008/fetchUrl', // Your endpoint that provides uploading by Url
+                //         }
+                //     }
+                // },
+                quote: {
+                    class: Quote,
+                    inlineToolbar: true,
+                    shortcut: 'CMD+SHIFT+O',
                     config: {
-                        endpoints: {
-                            byFile: 'http://localhost:8008/uploadFile', // Your backend file uploader endpoint
-                            byUrl: 'http://localhost:8008/fetchUrl', // Your endpoint that provides uploading by Url
+                        quotePlaceholder: 'Enter a quote',
+                        captionPlaceholder: 'Quote\'s author',
+                    },
+                },
+                embed: {
+                    class: Embed,
+                    inlineToolbar: true,
+                    config: {
+                      services: {
+                        youtube: true,
+                        coub: true,
+                        codepen: {
+                          regex: /https?:\/\/codepen.io\/([^\/\?\&]*)\/pen\/([^\/\?\&]*)/,
+                          embedUrl: 'https://codepen.io/<%= remote_id %>?height=300&theme-id=0&default-tab=css,result&embed-version=2',
+                          html: "<iframe height='300' scrolling='no' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>",
+                          height: 300,
+                          width: 600,
                         }
+                      }
                     }
-                }
+                  },
+                  raw: RawTool,
             },
             holder: 'editorjs',
-            data: fileData.document?JSON.parse(fileData.document):rawDocument,
+            data: fileData.document ? JSON.parse(fileData.document) : rawDocument,
             onReady: () => {
                 ref.current = editor;
             }
