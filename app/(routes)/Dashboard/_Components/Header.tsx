@@ -28,18 +28,22 @@ function Header() {
 
       </div>
       <Popover>
-        <PopoverTrigger> <div className='gap-2 flex text-sm h-8 hover:bg-blue-700 bg-blue-600 rounded-lg py-2 px-2  text-white'><Send className='h-4 w-4' />Invite</div></PopoverTrigger>
-        <PopoverContent className='h-24 w-[400px] bg-gray-50 rounded-lg'>
-          <div className='flex justify-between gap-5'>
+        <PopoverTrigger > <a className='gap-2 flex text-sm h-9 hover:bg-blue-700  align-middle bg-blue-600 rounded-lg py-2 px-2  text-white justify-center'><Send className='h-4 w-4 align-middle' />Invite</a></PopoverTrigger>
+        <PopoverContent className='h-24 w-[300px] bg-gray-50 rounded-lg flex'>
+          <label
+            htmlFor="UserEmail"
+            className="block overflow-hidden rounded-md border border-gray-200 px-3 py-2 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
+          >
+            <span className="text-xs font-medium text-gray-700"> Email </span>
 
-            <div className='border-2 border-gray-200 pb-3 pt-2 px-3 rounded-lg hover:bg-gray-100 hover:text-green-500'>
-              <a href='https://api.whatsapp.com/send?text='><MessageCircleMore className='text-emerald-300 ml-6' />WhatsApp</a>
-            </div>
-            <div className='border-2 border-gray-200 pb-3 pt-2 px-6 rounded-lg hover:bg-gray-100 hover:text-green-500'>
-              <a href='https://twitter.com/messages/compose'><MessageCircleMore className='text-emerald-300 ml-4' />Twitter</a>
-            </div>
+            <input
+              type="email"
+              id="UserEmail"
+              placeholder="anthony@rhcp.com"
+              className="mt-1 w-full border-none p-0 focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+            />
+          </label>
 
-          </div>
         </PopoverContent>
       </Popover>
 

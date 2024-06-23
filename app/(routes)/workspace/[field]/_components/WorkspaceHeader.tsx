@@ -11,7 +11,7 @@ function WorkspaceHeader({onSave,fileData}:any) {
     <div className='p-3 border-b flex justify-between items-center'>
 
     <div className='flex gap-2 items-center'>
-        <Image src={'/logo.png'} alt="logo"
+        <Image src={'/Icon.png'} alt="logo"
         width={40} height={40}
          />
         <a href='/Dashboard' className='text-blue-600'>Dashboard / <span className='text-xl text-slate-700'> {fileData?.fileName}</span></a>

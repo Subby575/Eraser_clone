@@ -4,6 +4,7 @@ import Header from "./_Components/Header";
 import Hero from "./_Components/Hero";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { useEffect } from "react";
+import LandingPage from "./Test/page";
 
 export default function Home() {
   const {user}=useKindeBrowserClient();
@@ -13,8 +14,7 @@ export default function Home() {
   },[user])
   return (
     <>
-    <Header/>
-    <Hero/>
+   <LandingPage/>
     </>
   );
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Excalidraw, MainMenu, WelcomeScreen } from "@excalidraw/excalidraw";
 import {FILE} from '@/app/(routes)/Dashboard/_Components/FileList' ;
 import { useMutation } from 'convex/react';
-
+import Image from 'next/image';
 import { api } from '@/convex/_generated/api';
 function Canvas({onSaveTrigger,fileId,fileData}:{onSaveTrigger:any,fileId:any,fileData:FILE}) {
     console.log(fileData)
@@ -50,9 +50,10 @@ function Canvas({onSaveTrigger,fileId,fileData}:{onSaveTrigger:any,fileId:any,fi
             <WelcomeScreen.Hints.MenuHint/>
             <WelcomeScreen.Hints.ToolbarHint/>
           <WelcomeScreen.Center>
-            <WelcomeScreen.Center.Logo />
+            {/* <WelcomeScreen.Center.Logo /> */}
+            <Image src='/FullLogo.png' height={500} width={500} alt="logo"/>
             <WelcomeScreen.Center.Heading>
-              Welcome Screen Heading!
+              Welcome to SlateFlow!
             </WelcomeScreen.Center.Heading>
             <WelcomeScreen.Center.Menu>
               <WelcomeScreen.Center.MenuItemHelp />

@@ -76,7 +76,7 @@ function SideNavTopSection({user,setActiveTeamInfo}:any) {
                 <>
                  <div>
                     <div className='flex items-center gap-3 hover:bg-slate-200 p-3 rounded-md cursor-pointer'  >
-                        <Image src='/logo.png' alt='Eraser' width={40} height={40} />
+                        <Image src='/Icon.png' alt='SlateFlow' width={40} height={40} />
                         <h2 className='flex gap-2 items-center font-bold text-[17px]'>{activeTeam?.teamNAme}
                         </h2>
                         <ChevronDown />
@@ -88,7 +88,7 @@ function SideNavTopSection({user,setActiveTeamInfo}:any) {
                  <div>
                     <div className='flex items-center gap-3 hover:bg-slate-200 p-3 rounded-md cursor-pointer'  >
 
-                        <Image src='/logo.png' alt='Eraser' width={40} height={40} />
+                        <Image src='/Icon.png' alt='Eraser' width={40} height={40} />
                         <h2 className='flex gap-2 items-center font-bold text-[17px]'>
                             <Skeleton className="w-[100px] h-[20px] rounded-full"  />
                         </h2>

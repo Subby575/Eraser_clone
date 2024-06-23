@@ -72,9 +72,9 @@ function FileList() {
     }, [fileList_])
 
     return (
-        <div className='mt-10'>
+        <div className='mt-10 bg-sky-50'>
             <div className="overflow-x-auto">
-                <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+                <table className="min-w-full divide-y-2 divide-gray-200  text-sm">
                     <thead className="ltr:text-left rtl:text-right">
                         <tr>
                             <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">File Name</td>
@@ -90,7 +90,7 @@ function FileList() {
                                     <td 
                                         onClick={() => handleFileClick(file._id)}
                                         className="whitespace-nowrap px-4 py-2 font-medium cursor-pointer text-gray-900">{file.fileName}</td>
-                                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">{moment(file._creationTime).format('LT')}</td>
+                                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">{moment(file._creationTime).calendar()}</td>
                                     <td className="whitespace-nowrap px-4 py-2 text-gray-700">{file.lastOpened ? moment(file.lastOpened).calendar() : 'Never'}</td>
                                     <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                                         <Image src={user?.picture}

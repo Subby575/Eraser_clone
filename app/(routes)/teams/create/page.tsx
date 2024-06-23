@@ -31,7 +31,7 @@ function CreateTeam() {
         <>
             <div className='md:px-16 my-16 px-6'>
 
-                <Image src="/logo.png" alt="Eraser" width={100} height={100} />
+                <Image src="/Icon.png" alt="SlateFlow" width={100} height={100} />
                 <div className='flex flex-col items-center mt-8'>
 
                     <h2 className='font-bold text-[40px] py-3'>What Should we call your team</h2>
