@@ -90,7 +90,7 @@ function SideNavTopSection({user,setActiveTeamInfo}:any) {
 
                         <Image src='/Icon.png' alt='Eraser' width={40} height={40} />
                         <h2 className='flex gap-2 items-center font-bold text-[17px]'>
-                            <Skeleton className="w-[100px] h-[20px] rounded-full"  />
+                            <Skeleton className="bg-sky-100 w-[100px] h-[20px] rounded-full"  />
                         </h2>
                         <ChevronDown />
                     </div>

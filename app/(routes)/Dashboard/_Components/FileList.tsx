@@ -72,7 +72,7 @@ function FileList() {
     }, [fileList_])
 
     return (
-        <div className='mt-10 bg-sky-50'>
+        <div className='mt-10 bg-white'>
             <div className="overflow-x-auto">
                 <table className="min-w-full divide-y-2 divide-gray-200  text-sm">
                     <thead className="ltr:text-left rtl:text-right">
@@ -118,19 +118,19 @@ function FileList() {
                             Array.from({ length: 5 }).map((_, index) => (
                                 <tr key={index}>
                                     <td className="whitespace-nowrap px-4 py-2">
-                                        <Skeleton className="w-[100px] h-[20px] rounded-full" />
+                                        <Skeleton className="bg-sky-100 w-[100px] h-[20px] rounded-full" />
                                     </td>
                                     <td className="whitespace-nowrap px-4 py-2">
-                                        <Skeleton className="w-[100px] h-[20px] rounded-full" />
+                                        <Skeleton className="bg-sky-100 w-[100px] h-[20px] rounded-full" />
                                     </td>
                                     <td className="whitespace-nowrap px-4 py-2">
-                                        <Skeleton className="w-[100px] h-[20px] rounded-full" />
+                                        <Skeleton className="bg-sky-100 w-[100px] h-[20px] rounded-full" />
                                     </td>
                                     <td className="whitespace-nowrap px-4 py-2">
-                                        <Skeleton className="w-[30px] h-[30px] rounded-full" />
+                                        <Skeleton className="bg-sky-100 w-[30px] h-[30px] rounded-full" />
                                     </td>
                                     <td className="whitespace-nowrap px-4 py-2">
-                                        <Skeleton className="w-[100px] h-[20px] rounded-full" />
+                                        <Skeleton className="bg-sky-100 w-[100px] h-[20px] rounded-full" />
                                     </td>
                                 </tr>
                             ))

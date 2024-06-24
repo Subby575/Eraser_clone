@@ -1,6 +1,7 @@
 @tailwind base;
   @tailwind components;
   @tailwind utilities;
+
   h1.ce-header{
     @apply text-3xl font-bold
   }
@@ -19,6 +20,11 @@
   h6.ce-header{
     @apply text-base font-semibold
   }
+
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+  
   @layer base {
     :root {
       --background: 0 0% 100%;

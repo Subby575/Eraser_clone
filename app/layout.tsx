@@ -1,27 +1,59 @@
-import type { Metadata } from "next";
+"use client"
+
+// import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { useState, useEffect } from 'react';
 import "./globals.css";
 import ConvexClientProvider from "./ConvexClientProvider";
 import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Slate Flow",
-  description: " ",
-};
+// export const metadata: Metadata = {
+//   title: "Slate Flow",
+//   description: " ",
+// };
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setDarkMode(savedTheme === 'dark');
+      document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setDarkMode(prefersDark);
+      document.documentElement.classList.toggle('dark', prefersDark);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+    document.documentElement.classList.toggle('dark', darkMode);
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={darkMode ? 'dark' : ''}>
+      <body className={`${inter.className} transition-colors duration-200`}>
         <ConvexClientProvider>
+          <button
+            onClick={toggleDarkMode}
+            className="fixed bottom-4 right-4 p-2 bg-gray-800 text-white rounded-full focus:outline-none z-50"
+          >
+            {darkMode ? 'Light Mode' : 'Dark Mode'}
+          </button>
           {children}
-       <Toaster/>
+          <Toaster />
         </ConvexClientProvider>
       </body>
     </html>

@@ -1,121 +1,81 @@
-"use client";
-import React from "react";
-import { motion } from "framer-motion";
-import Link from "next/link";
-import Image from "next/image";
+"use client"
+import React, { useState, useEffect } from 'react';
+import { RegisterLink, LoginLink } from '@kinde-oss/kinde-auth-nextjs';
+import { usePathname } from 'next/navigation';
 
-const transition = {
-  type: "spring",
-  mass: 0.5,
-  damping: 11.5,
-  stiffness: 100,
-  restDelta: 0.001,
-  restSpeed: 0.001,
-};
+const Navbar: React.FC = () => {
+    const [expanded, setExpanded] = useState(false);
 
-export const MenuItem = ({
-  setActive,
-  active,
-  item,
-  children,
-}: {
-  setActive: (item: string) => void;
-  active: string | null;
-  item: string;
-  children?: React.ReactNode;
-}) => {
-  return (
-    <div onMouseEnter={() => setActive(item)} className="relative ">
-      <motion.p
-        transition={{ duration: 0.3 }}
-        className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white"
-      >
-        {item}
-      </motion.p>
-      {active !== null && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.85, y: 10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={transition}
-        >
-          {active === item && (
-            <div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4">
-              <motion.div
-                transition={transition}
-                layoutId="active" // layoutId ensures smooth animation
-                className="bg-white dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl"
-              >
-                <motion.div
-                  layout // layout ensures smooth animation
-                  className="w-max h-full p-4"
-                >
-                  {children}
-                </motion.div>
-              </motion.div>
+    const toggleMenu = () => {
+        setExpanded(!expanded);
+    };
+
+    const path = usePathname().slice(6, 20);
+    console.log(path);
+
+    const menuItems = ["Feature", "Pricing", "Contact"];
+
+    return (
+        <>
+            <div className="fixed top-0 w-full z-50 bg-gray-50 dark:bg-gray-800 shadow-md overflow-hidden">
+                <header className="py-2 md:py-3">
+                    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="flex items-center justify-between">
+                            <div className="flex-shrink-0">
+                                <a href="/" title="" className="flex rounded outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2">
+                                    <img className="w-auto h-8" src="/Icon.png" alt="" />
+                                    <h1 className='text-neutral-700 dark:text-white font-bold leading-tight my-2'>Slate Flow</h1>
+                                </a>
+                            </div>
+
+                            <div className="flex lg:hidden">
+                                <button type="button" className="text-gray-900 dark:text-white" onClick={toggleMenu}>
+                                    {!expanded ? (
+                                        <svg className="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 6h16M4 12h16M4 18h16" />
+                                        </svg>
+                                    ) : (
+                                        <svg className="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    )}
+                                </button>
+                            </div>
+
+                            <div className="hidden lg:flex lg:ml-16 lg:items-center lg:justify-center lg:space-x-10 xl:space-x-16">
+                                {menuItems.map((item, index) => (
+                                    <a key={index} href={`#${item}`} title="" className={`text-base font-medium transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2 ${path === item ? 'text-gray-400 dark:text-gray-400' : 'text-gray-900 dark:text-white'}`}> {item} </a>
+                                ))}
+                            </div>
+
+                            <div className="hidden lg:ml-auto lg:flex lg:items-center lg:space-x-10">
+                                <LoginLink className="text-base font-medium text-gray-900 dark:text-white transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"> Login </LoginLink>
+                                <RegisterLink className="inline-flex items-center justify-center px-6 py-3 text-base font-bold leading-7 text-white transition-all duration-200 bg-gray-900 dark:bg-gray-700 border border-transparent rounded-xl hover:bg-gray-600 dark:hover:bg-gray-500 font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" role="button">
+                                    Sign up
+                                </RegisterLink>
+                            </div>
+                        </div>
+
+                        {expanded && (
+                            <nav>
+                                <div className="px-1 py-8">
+                                    <div className="grid gap-y-7">
+                                        {menuItems.map((item, index) => (
+                                            <a key={index} href={`#${item}`} className={`flex items-center p-3 -m-3 text-base font-medium text-gray-900 dark:text-white transition-all duration-200 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none font-pj focus:ring-1 focus:ring-gray-900 focus:ring-offset-2 ${path === item ? 'text-gray-400 dark:text-gray-400' : 'text-gray-900 dark:text-white'}`}> {item} </a>
+                                        ))}
+                                        <LoginLink className="flex items-center p-3 -m-3 text-base font-medium text-gray-900 dark:text-white transition-all duration-200 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none font-pj focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"> Login </LoginLink>
+                                        <RegisterLink className="inline-flex items-center justify-center px-6 py-3 text-base font-bold leading-7 text-white transition-all duration-200 bg-gray-900 dark:bg-gray-700 border border-transparent rounded-xl hover:bg-gray-600 dark:hover:bg-gray-500 font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" role="button">
+                                            Sign up
+                                        </RegisterLink>
+                                    </div>
+                                </div>
+                            </nav>
+                        )}
+                    </div>
+                </header>
             </div>
-          )}
-        </motion.div>
-      )}
-    </div>
-  );
+        </>
+    );
 };
 
-export const Menu = ({
-  setActive,
-  children,
-}: {
-  setActive: (item: string | null) => void;
-  children: React.ReactNode;
-}) => {
-  return (
-    <nav
-      onMouseLeave={() => setActive(null)} // resets the state
-      className="relative rounded-full boder border-transparent dark:bg-black dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-4 px-8 py-6 "
-    >
-      {children}
-    </nav>
-  );
-};
-
-export const ProductItem = ({
-  title,
-  description,
-  href,
-  src,
-}: {
-  title: string;
-  description: string;
-  href: string;
-  src: string;
-}) => {
-  return (
-    <Link href={href} className="flex space-x-2">
-      <Image
-        src={src}
-        width={140}
-        height={70}
-        alt={title}
-        className="flex-shrink-0 rounded-md shadow-2xl"
-      />
-      <div>
-        <h4 className="text-xl font-bold mb-1 text-black dark:text-white">
-          {title}
-        </h4>
-        <p className="text-neutral-700 text-sm max-w-[10rem] dark:text-neutral-300">
-          {description}
-        </p>
-      </div>
-    </Link>
-  );
-};
-
-export const HoveredLink = ({ children, ...rest }: any) => {
-  return (
-    <Link
-      {...rest}
-      className="text-neutral-700 dark:text-neutral-200 hover:text-black "
-    >
-      {children}
-    </Link>
-  );
-};
+export default Navbar;
