@@ -6,6 +6,7 @@ import PricingDialog from '../(routes)/Dashboard/_Components/PricingDialog';
 // import { StickyScroll } from '../_Components/sticky-scroll-reveal';
 import { StickyScrollRevealDemo } from '../_Components/Feature';
 import {TextRevealByWord} from '../_Components/Word-scroll';
+import Pricing from '../_Components/Pricing';
 const LandingPage: React.FC = () => {
     const [expanded, setExpanded] = useState(false);
     // const [darkMode, setDarkMode] = useState(false);
@@ -84,7 +85,7 @@ const LandingPage: React.FC = () => {
             </div>
             <div id='Pricing' className='h-screen bg-white dark:bg-slate-900 w-screen '>
 
-            <PricingDialog/>
+            <Pricing/>
             </div>
         </>
     );

@@ -24,7 +24,19 @@
   ::-webkit-scrollbar {
     width: 0px;
   }
+  .gutter {
+    background-color: #e2e8f0;
+    background-repeat: no-repeat;
+    background-position: 50%;
+  }
   
+  .gutter.gutter-horizontal {
+    cursor: col-resize;
+  }
+  
+  .gutter.gutter-vertical {
+    cursor: row-resize;
+  }
   @layer base {
     :root {
       --background: 0 0% 100%;

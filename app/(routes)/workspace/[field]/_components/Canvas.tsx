@@ -12,7 +12,18 @@ function Canvas({onSaveTrigger,fileId,fileData}:{onSaveTrigger:any,fileId:any,fi
     useEffect(()=>{
         onSaveTrigger&&saveWhiteboard();
     },[onSaveTrigger])
-
+    const [darkMode, setDarkMode] = useState(false);
+    useEffect(() => {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        setDarkMode(savedTheme === 'dark');
+        document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+      } else {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setDarkMode(prefersDark);
+        document.documentElement.classList.toggle('dark', prefersDark);
+      }
+    }, []);
 
     const saveWhiteboard=()=>{
         updateWhiteboard({
@@ -25,7 +36,7 @@ function Canvas({onSaveTrigger,fileId,fileData}:{onSaveTrigger:any,fileId:any,fi
         
     <div style={{ height: "670px" }}>
    {fileData&& <Excalidraw 
-    theme='light'
+    theme={darkMode?'dark':'light'}
     initialData={{
         elements:fileData?.whiteboard&&JSON.parse(fileData?.whiteboard)
     }}

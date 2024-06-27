@@ -40,7 +40,7 @@ const checkUser=async()=>{
 
   return (
     <>
-    <div className='p-8'>
+    <div className='p-8 dark:bg-gray-900 h-screen'>
 
    <Header/>
    <FileList/>

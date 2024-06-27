@@ -1,11 +1,12 @@
 "use client"
-
+import '@/app/_Components/theme.css'
 // import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { useState, useEffect } from 'react';
 import "./globals.css";
 import ConvexClientProvider from "./ConvexClientProvider";
 import { Toaster } from "@/components/ui/sonner";
+import Toggle from "./_Components/Toggle";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [darkMode, setDarkMode] = useState(false);
-
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
@@ -46,12 +46,10 @@ export default function RootLayout({
     <html lang="en" className={darkMode ? 'dark' : ''}>
       <body className={`${inter.className} transition-colors duration-200`}>
         <ConvexClientProvider>
-          <button
-            onClick={toggleDarkMode}
-            className="fixed bottom-4 right-4 p-2 bg-gray-800 text-white rounded-full focus:outline-none z-50"
-          >
-            {darkMode ? 'Light Mode' : 'Dark Mode'}
-          </button>
+          <label className="switch fixed bottom-4 right-4 p-2 bg-gray-800 text-white rounded-full focus:outline-none z-50">
+            <input type="checkbox" onClick={toggleDarkMode} />
+            <span className="slider"></span>
+          </label>
           {children}
           <Toaster />
         </ConvexClientProvider>

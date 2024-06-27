@@ -1,41 +1,40 @@
 "use client"
-import React, { useEffect } from 'react'
-import WorkspaceHeader from './_components/WorkspaceHeader'
-import Editor from './_components/Editor'
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import WorkspaceHeader from './_components/WorkspaceHeader';
+import Editor from './_components/Editor';
 import { useConvex } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { FILE } from '../../Dashboard/_Components/FileList';
 import Canvas from './_components/Canvas';
-function workspace({ params }: any) {
-    const [triggersave, setTriggerSave] = useState(false);
-    const convex=useConvex();
-    const [fileData,setFileData]=useState<FILE | any>();
-    useEffect(()=>{
-        params.field&&getFileData();
-    },[])
+import Split from 'react-split';
 
-    const getFileData=async()=>{
-        const result=await convex.query(api.files.getFileById,{_id:params.field})
-        setFileData(result)
-        // console.log(result)
-    }
+function Workspace({ params, darkMode }: { params: any, darkMode: boolean }) {
+    const [triggersave, setTriggerSave] = useState(false);
+    const convex = useConvex();
+    const [fileData, setFileData] = useState<FILE | any>();
+
+    useEffect(() => {
+        params.field && getFileData();
+    }, []);
+
+    const getFileData = async () => {
+        const result = await convex.query(api.files.getFileById, { _id: params.field });
+        setFileData(result);
+    };
+
     return (
-        <div>
-            <WorkspaceHeader onSave={() => setTriggerSave(!triggersave)} fileData={fileData}  />
-            {/* Workspace layout */}
-            <div className='grid grid-cols-1 md:grid-cols-2'>
-                {/* Document */}
-                <div className=' h-screen'>
+        <div className="h-screen flex flex-col">
+            <WorkspaceHeader onSave={() => setTriggerSave(!triggersave)} fileData={fileData} />
+            <Split className="flex-grow flex" sizes={[50, 50]} minSize={200} gutterSize={10}>
+                <div className='flex-grow h-full'>
                     <Editor onSaveTrigger={triggersave} fileId={params.field} fileData={fileData} />
                 </div>
-                {/* Whiteboard Canvas */}
-                <div className='h-screen border-l'>
-                <Canvas onSaveTrigger={triggersave} fileId={params.field} fileData={fileData} />
+                <div className='flex-grow h-full border-l'>
+                    <Canvas onSaveTrigger={triggersave} fileId={params.field} fileData={fileData}  />
                 </div>
-            </div>
+            </Split>
         </div>
-    )
+    );
 }
 
-export default workspace
+export default Workspace;

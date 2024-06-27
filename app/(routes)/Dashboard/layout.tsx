@@ -30,8 +30,8 @@ function Dashboardayout(
     return (
         <div>
             <FileListContext.Provider value={{fileList_,setFileList_}}>
-            <div className='grid grid-cols-4'>
-                <div className='h-screen w-64 fixed'>
+            <div className='grid grid-cols-4 '>
+                <div className='h-screen w-64 fixed dark:bg-slate-900'>
                     <SideNav />
 
                 </div>
