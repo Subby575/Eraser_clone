@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { LoginLink, RegisterLink } from '@kinde-oss/kinde-auth-nextjs';
 import Navbar from '../_Components/Navbar';
 import PricingDialog from '../(routes)/Dashboard/_Components/PricingDialog';
@@ -16,14 +16,18 @@ const LandingPage: React.FC = () => {
         setExpanded(!expanded);
     };
 
-    // const toggleDarkMode = () => {
-    //     setDarkMode(!darkMode);
-    //     if (darkMode) {
-    //         document.documentElement.classList.remove('dark');
-    //     } else {
-    //         document.documentElement.classList.add('dark');
-    //     }
-    // };
+    const [theme, setTheme] = useState('light');
+    useEffect(() => {
+      const root = document.documentElement;
+      const observer = new MutationObserver(() => {
+          const isDarkMode = root.classList.contains('dark');
+          setTheme(isDarkMode ? 'dark' : 'light');
+      });
+
+      observer.observe(root, { attributes: true, attributeFilter: ['class'] });
+
+      return () => observer.disconnect();
+  }, []);
 
     return (
         <>
@@ -64,7 +68,14 @@ const LandingPage: React.FC = () => {
                         <div className="absolute inset-0 h-2/3 bg-gray-50 dark:bg-gradient-to-r from-slate-500 to-slate-800"></div>
                         <div className="relative mx-auto overflow-hidden flex justify-center">
                             <div className="lg:max-w-5xl md:mx-auto lg:mx-auto">
-                                <img className="transform scale-110" src="/Feature.png" alt="" />
+                                {
+                                    theme==='dark'?
+                                    <img src="/show.png" alt="" />
+                                    :
+                                    <img  src="/show-light.png" alt="" />
+                                    
+
+                                }
                             </div>
                         </div>
                     </div>
