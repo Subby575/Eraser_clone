@@ -8,7 +8,6 @@ import { StickyScrollRevealDemo } from '../_Components/Feature';
 import {TextRevealByWord} from '../_Components/Word-scroll';
 import Pricing from '../_Components/Pricing';
 import { Footer } from '../_Components/Footer';
-import Feats from '../_Components/Feats';
 const LandingPage: React.FC = () => {
     const [expanded, setExpanded] = useState(false);
     // const [darkMode, setDarkMode] = useState(false);
