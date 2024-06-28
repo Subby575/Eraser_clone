@@ -1,4 +1,4 @@
-# SlateFlow
+# SlateFlow (https://slateflow.vercel.app/)
 
 **The ultimate docs and diagrams platform for engineering teams.**
 
@@ -84,9 +84,6 @@ We welcome contributions from the community! If you'd like to contribute, please
 5. Push to the branch (`git push origin feature-branch`).
 6. Create a pull request.
 
-## License
-
-This project is licensed under the MIT License. See the [MIT](LICENSE) file for more details.
 
 ---
 
