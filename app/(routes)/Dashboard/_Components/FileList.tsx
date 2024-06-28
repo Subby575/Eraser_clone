@@ -125,7 +125,7 @@ function FileList() {
                     <tbody>
                         {isLoaded ? (
                             fileList.map((file: FILE, index: number) => (
-                                <tr key={index} className="odd:bg-gray-50 dark:odd:bg-gray-600">
+                                <tr key={index} className="odd:bg-gray-50 dark:odd:bg-slate-600">
                                     <td
                                         onClick={() => handleFileClick(file._id)}
                                         className="whitespace-nowrap px-4 py-2 font-medium cursor-pointer text-gray-900 dark:text-gray-50">{file.fileName}</td>
