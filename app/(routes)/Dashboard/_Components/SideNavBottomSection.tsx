@@ -52,8 +52,9 @@ function SideNavBottomSection({ onFileCreate, totalFiles }: any) {
 
       <Dialog>
         <DialogTrigger className='w-full ' asChild>
-
-          <Button className='w-full bg-blue-600 hover:bg-blue-700 dark:text-gray-100 justify-start'>{totalFiles < Constant.MAX_FREE_FILES ? "New File" : "Upgrade"}</Button></DialogTrigger>
+        {totalFiles < Constant.MAX_FREE_FILES ? <Button className='w-full bg-blue-600 hover:bg-blue-700 dark:text-gray-100 justify-center'>New Files</Button>: <Button className='w-full bg-gradient-to-r from-red-500 to-orange-500 hover:bg-blue-700 dark:text-gray-100 justify-center '>Upgrade</Button>}
+          {/* <Button className='w-full bg-blue-600 hover:bg-blue-700 dark:text-gray-100 justify-start'>{totalFiles < Constant.MAX_FREE_FILES ? "New File" : "Upgrade"}</Button> */}
+          </DialogTrigger>
         {totalFiles < Constant.MAX_FREE_FILES ? <DialogContent>
           <DialogHeader>
             <DialogTitle>Create New File</DialogTitle>

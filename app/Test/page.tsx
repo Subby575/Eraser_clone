@@ -7,6 +7,8 @@ import PricingDialog from '../(routes)/Dashboard/_Components/PricingDialog';
 import { StickyScrollRevealDemo } from '../_Components/Feature';
 import {TextRevealByWord} from '../_Components/Word-scroll';
 import Pricing from '../_Components/Pricing';
+import { Footer } from '../_Components/Footer';
+import Feats from '../_Components/Feats';
 const LandingPage: React.FC = () => {
     const [expanded, setExpanded] = useState(false);
     // const [darkMode, setDarkMode] = useState(false);
@@ -27,7 +29,7 @@ const LandingPage: React.FC = () => {
     return (
         <>
             <Navbar/>
-            <section className={`pt-12 md:mt-20 overflow-y-hidden  dark:bg-gray-900 bg-gray-50 sm:pt-16`}>
+            <section className={`pt-12 md:mt-20 overflow-y-hidden  dark:bg-gradient-to-r from-slate-500 to-slate-800 bg-gray-50 sm:pt-16`}>
                 <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="max-w-2xl mx-auto text-center">
                         <h1 className={`px-6 text-lg dark:text-gray-300 text-gray-600 font-inter`}>
@@ -58,9 +60,9 @@ const LandingPage: React.FC = () => {
                     </div>
                 </div>
 
-                <div className={`pb-12 mt-4 dark:bg-gray-900  bg-white`}>
+                <div className={`pb-12 mt-4 dark:bg-gradient-to-r from-slate-500 to-slate-800  bg-white`}>
                     <div className="relative">
-                        <div className="absolute inset-0 h-2/3 bg-gray-50 dark:bg-gray-900"></div>
+                        <div className="absolute inset-0 h-2/3 bg-gray-50 dark:bg-gradient-to-r from-slate-500 to-slate-800"></div>
                         <div className="relative mx-auto overflow-hidden flex justify-center">
                             <div className="lg:max-w-5xl md:mx-auto lg:mx-auto">
                                 <img className="transform scale-110" src="/Feature.png" alt="" />
@@ -75,17 +77,20 @@ const LandingPage: React.FC = () => {
             >
                 Toggle Dark Mode
             </button> */}
-            <div id='Feature' className='dark:bg-slate-900 '>
+            <div id='Feature' className='dark:bg-gradient-to-r from-slate-500 to-slate-800'>
                 <div className='h-[160vh] w-screen'>
 
             <TextRevealByWord text="Why Our Platform is Your Next Best Friend" />
                 </div>
                 <StickyScrollRevealDemo/>
-
+                {/* <Feats/> */}
             </div>
-            <div id='Pricing' className='h-screen bg-white dark:bg-slate-900 w-screen '>
+            <div id='Pricing' className='h-screen bg-white dark:bg-gradient-to-r from-slate-500 to-slate-800'>
 
             <Pricing/>
+            </div>
+            <div>
+                <Footer/>
             </div>
         </>
     );

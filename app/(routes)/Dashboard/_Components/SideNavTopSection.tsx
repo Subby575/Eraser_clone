@@ -181,19 +181,36 @@ function SideNavTopSection({ user, setActiveTeamInfo }: any) {
                                 </h2>
                             ))
                         ) : (
-                            Premium.map((item, index) => (
-                                <h2 key={index} className='flex gap-2 items-center 
-                                dark:hover:bg-gray-700
-                                hover:bg-gray-100 rounded-lg text-sm p-2 cursor-pointer'
-                                    onClick={() => onMenuClick(item)}>
-                                    <item.icon className='h-4 w-4' /> {item.name}
+                            // Premium.map((item, index) => (
+                            //     <h2 key={index} className='flex gap-2 items-center 
+                            //     dark:hover:bg-gray-700
+                            //     hover:bg-gray-300 rounded-lg text-sm p-2 cursor-pointer'
+                            //         onClick={() => onMenuClick(item)}>
+                            //         <item.icon className='h-4 w-4' /> {item.name}
+                            //     </h2>
+                            // ))
+
+                            <>
+                             <h2 className='flex gap-2 items-center bg-gradient-to-r from-red-500 to-orange-500
+                             text-white dark:hover:bg-white
+                                hover:bg-gray-300 rounded-lg text-sm p-2 my-2 cursor-pointer'
+                                    onClick={() => onMenuClick(0)}>
+                                    <Crown className='h-4 w-4 text-amber-50' /> Premium
                                 </h2>
-                            ))
+                             <h2 className='flex gap-2 items-center 
+                             text-gray-900 
+                             dark:text-neutral-50
+                             dark:hover:bg-gray-700
+                                hover:bg-gray-300 rounded-lg text-sm p-2 my-2 cursor-pointer'
+                                    onClick={() => onMenuClick(1)}>
+                                    <Settings className='h-4 w-4 text-gray-900 dark:text-white' /> Settings
+                                </h2>
+                            </>
                         )}
                         
                         <LogoutLink>
                             <h2 className='flex gap-2 items-center dark:hover:bg-gray-700 hover:bg-gray-300
-                            
+                        
                             rounded-lg text-sm p-2 cursor-pointer'><LogOut className='h-4 w-4' />Logout</h2>
                         </LogoutLink>
                     </div>

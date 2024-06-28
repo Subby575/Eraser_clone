@@ -8,7 +8,7 @@ import { FILE } from '../../Dashboard/_Components/FileList';
 import Canvas from './_components/Canvas';
 import Split from 'react-split';
 
-function Workspace({ params, darkMode }: { params: any, darkMode: boolean }) {
+function Workspace({ params }: { params: any }) {
     const [triggersave, setTriggerSave] = useState(false);
     const convex = useConvex();
     const [fileData, setFileData] = useState<FILE | any>();
