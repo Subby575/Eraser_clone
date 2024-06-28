@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 
 const Navbar: React.FC = () => {
     const [expanded, setExpanded] = useState(false);
+    const [logo, setLogo] = useState('/logo-no-background.png'); // default logo for light mode
 
     const toggleMenu = () => {
         setExpanded(!expanded);
@@ -15,6 +16,18 @@ const Navbar: React.FC = () => {
 
     const menuItems = ["Feature", "Pricing", "Contact"];
 
+    useEffect(() => {
+        const root = document.documentElement;
+        const observer = new MutationObserver(() => {
+            const isDarkMode = root.classList.contains('dark');
+            setLogo(isDarkMode ? '/logo-no-background.png' : '/logo-no-background.png');
+        });
+
+        observer.observe(root, { attributes: true, attributeFilter: ['class'] });
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
         <>
             <div className="fixed top-0 w-full z-50 bg-gray-50 dark:bg-gray-800 shadow-md overflow-hidden">
@@ -22,9 +35,8 @@ const Navbar: React.FC = () => {
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="flex items-center justify-between">
                             <div className="flex-shrink-0">
-                                <a href="/" title="" className="flex rounded outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2">
-                                    <img className="w-auto h-8" src="/Icon.png" alt="" />
-                                    <h1 className='text-neutral-700 dark:text-white font-bold leading-tight my-2'>Slate Flow</h1>
+                                <a href="/" title="" className="flex rounded outline-none ">
+                                    <img className="w-auto h-8" src={logo} alt="SlateFlow" />
                                 </a>
                             </div>
 
@@ -44,13 +56,13 @@ const Navbar: React.FC = () => {
 
                             <div className="hidden lg:flex lg:ml-16 lg:items-center lg:justify-center lg:space-x-10 xl:space-x-16">
                                 {menuItems.map((item, index) => (
-                                    <a key={index} href={`#${item}`} title="" className={`text-base font-medium transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2 ${path === item ? 'text-gray-400 dark:text-gray-400' : 'text-gray-900 dark:text-white'}`}> {item} </a>
+                                    <a key={index} href={`#${item}`} title="" className={`text-base font-medium transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50  ${path === item ? 'text-gray-400 dark:text-gray-400' : 'text-gray-900 dark:text-white'}`}> {item} </a>
                                 ))}
                             </div>
 
                             <div className="hidden lg:ml-auto lg:flex lg:items-center lg:space-x-10">
-                                <LoginLink className="text-base font-medium text-gray-900 dark:text-white transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"> Login </LoginLink>
-                                <RegisterLink className="inline-flex items-center justify-center px-6 py-3 text-base font-bold leading-7 text-white transition-all duration-200 bg-gray-900 dark:bg-gray-700 border border-transparent rounded-xl hover:bg-gray-600 dark:hover:bg-gray-500 font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" role="button">
+                                <LoginLink className="text-base font-medium text-gray-900 dark:text-white transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 "> Login </LoginLink>
+                                <RegisterLink className="inline-flex items-center justify-center px-6 py-3 text-base font-bold leading-7 text-white transition-all duration-200 bg-gray-900 dark:bg-gray-700 border border-transparent rounded-xl hover:bg-gray-600 dark:hover:bg-gray-500 font-pj  " role="button">
                                     Sign up
                                 </RegisterLink>
                             </div>

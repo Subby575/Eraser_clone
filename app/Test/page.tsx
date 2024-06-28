@@ -35,7 +35,7 @@ const LandingPage: React.FC = () => {
                             Transform the way you collaborate and create.
                         </h1>
                         <h1 className={`mt-5 text-4xl font-bold leading-tight sm:leading-tight sm:text-5xl dark:text-gray-100  text-neutral-700 lg:text-6xl lg:leading-tight font-pj`}>
-                            Unleash Your Creativity, Collaborate
+                            Unleash Your Creativity,Document
                             <span className="relative inline-flex sm:inline">
                                 <span className="bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] blur-lg filter opacity-30 w-full h-full absolute inset-0"></span>
                                 <span className="relative"> Seamlessly. </span>
@@ -88,7 +88,7 @@ const LandingPage: React.FC = () => {
 
             <Pricing/>
             </div>
-            <div>
+            <div id='Contact'>
                 <Footer/>
             </div>
         </>

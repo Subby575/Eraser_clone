@@ -77,6 +77,18 @@ function SideNavTopSection({ user, setActiveTeamInfo }: any) {
             setIsLoaded(true);
         }
     }, [activeTeam]);
+    const [theme, setTheme] = useState('');
+    useEffect(() => {
+        const root = document.documentElement;
+        const observer = new MutationObserver(() => {
+            const isDarkMode = root.classList.contains('dark');
+            setTheme(isDarkMode ? 'dark' : 'light');
+        });
+
+        observer.observe(root, { attributes: true, attributeFilter: ['class'] });
+
+        return () => observer.disconnect();
+    }, []);
     const getTeamList = async () => {
         const result = await convex.query(api.teams.getTeam, { email: user?.email });
         setTeamList(result);
@@ -114,19 +126,36 @@ function SideNavTopSection({ user, setActiveTeamInfo }: any) {
                     {
                         isLoaded ?
                             <div>
-                                <div className='flex items-center gap-3  w-[15rem]
+                                <div className='flex gap-3  w-[15rem]
                                 dark:bg-slate-700
                                 dark:hover:bg-slate-600
                                 hover:bg-slate-200 p-3 rounded-md cursor-pointer'>
-                                    <Image src='/Icon.png' alt='SlateFlow' width={40} height={40} />
-                                    <h2 className='flex gap-2 items-center font-bold text-[17px]'>{activeTeam?.teamNAme}</h2>
+                                    {
+                                        theme==='dark'
+                                        ?
+                                        <Image src='/chalk.svg' alt='SlateFlow' width={20} height={20} />
+                                        :
+                                        <Image src='/chalk-dark.svg'  alt='SlateFlow' width={20} height={20} />
+
+
+                                    }
+
+                                    <h2 className='flex gap-2 font-bold text-[17px] items-center'>{activeTeam?.teamNAme}</h2>
                                     <ChevronDown className='' />
                                 </div>
                             </div>
                             :
                             <div>
                                 <div className='flex items-center gap-3 hover:bg-slate-200 p-3 rounded-md cursor-pointer'>
-                                    <Image src='/Icon.png' alt='Eraser' width={40} height={40} />
+                                {
+                                        theme==='dark'
+                                        ?
+                                        <Image src='/chalk.svg' alt='SlateFlow' width={20} height={20} />
+                                        :
+                                        <Image src='/chalk-dark.svg'  alt='SlateFlow' width={20} height={20} />
+
+
+                                    }
                                     <h2 className='flex gap-2 items-center font-bold text-[17px]'>
                                         <Skeleton className="bg-sky-100 w-[100px] h-[20px] rounded-full" />
                                     </h2>
@@ -191,13 +220,13 @@ function SideNavTopSection({ user, setActiveTeamInfo }: any) {
                             // ))
 
                             <>
-                             <h2 className='flex gap-2 items-center bg-gradient-to-r from-red-500 to-orange-500
+                                <h2 className='flex gap-2 items-center bg-gradient-to-r from-red-500 to-orange-500
                              text-white dark:hover:bg-white
                                 hover:bg-gray-300 rounded-lg text-sm p-2 my-2 cursor-pointer'
                                     onClick={() => onMenuClick(0)}>
                                     <Crown className='h-4 w-4 text-amber-50' /> Premium
                                 </h2>
-                             <h2 className='flex gap-2 items-center 
+                                <h2 className='flex gap-2 items-center 
                              text-gray-900 
                              dark:text-neutral-50
                              dark:hover:bg-gray-700
@@ -207,7 +236,7 @@ function SideNavTopSection({ user, setActiveTeamInfo }: any) {
                                 </h2>
                             </>
                         )}
-                        
+
                         <LogoutLink>
                             <h2 className='flex gap-2 items-center dark:hover:bg-gray-700 hover:bg-gray-300
                         

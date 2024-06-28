@@ -12,18 +12,20 @@ function Canvas({onSaveTrigger,fileId,fileData}:{onSaveTrigger:any,fileId:any,fi
     useEffect(()=>{
         onSaveTrigger&&saveWhiteboard();
     },[onSaveTrigger])
-    const [darkMode, setDarkMode] = useState(false);
+
+
+    const [theme, setTheme] = useState('light');
     useEffect(() => {
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) {
-        setDarkMode(savedTheme === 'dark');
-        document.documentElement.classList.toggle('dark', savedTheme === 'dark');
-      } else {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        setDarkMode(prefersDark);
-        document.documentElement.classList.toggle('dark', prefersDark);
-      }
-    }, []);
+      const root = document.documentElement;
+      const observer = new MutationObserver(() => {
+          const isDarkMode = root.classList.contains('dark');
+          setTheme(isDarkMode ? 'dark' : 'light');
+      });
+
+      observer.observe(root, { attributes: true, attributeFilter: ['class'] });
+
+      return () => observer.disconnect();
+  }, []);
 
     const saveWhiteboard=()=>{
         updateWhiteboard({
@@ -36,7 +38,7 @@ function Canvas({onSaveTrigger,fileId,fileData}:{onSaveTrigger:any,fileId:any,fi
         
     <div style={{ height: "670px" }}>
    {fileData&& <Excalidraw 
-    theme={darkMode?'dark':'light'}
+    theme={theme==='dark'?'dark':'light'}
     initialData={{
         elements:fileData?.whiteboard&&JSON.parse(fileData?.whiteboard)
     }}
@@ -62,8 +64,14 @@ function Canvas({onSaveTrigger,fileId,fileData}:{onSaveTrigger:any,fileId:any,fi
             <WelcomeScreen.Hints.ToolbarHint/>
           <WelcomeScreen.Center>
             {/* <WelcomeScreen.Center.Logo /> */}
-            <Image src='/FullLogo.png' height={500} width={500} alt="logo"/>
-            <WelcomeScreen.Center.Heading>
+            {theme==='dark'?
+             <Image src='/Icon.png' height={500} width={500} alt="logo"/>
+            :
+            <Image src='/logo-black-trans.png' height={700} width={700} alt="logo"/>
+            }
+
+            {/* <Image src='/FullLogo.png' height={500} width={500} alt="logo"/> */}
+            <WelcomeScreen.Center.Heading >
               Welcome to SlateFlow!
             </WelcomeScreen.Center.Heading>
             <WelcomeScreen.Center.Menu>

@@ -1,5 +1,5 @@
 "use client"
-import React, { use, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -26,12 +26,25 @@ function CreateTeam() {
             }
         })
     }
+    const [theme, setTheme] = useState('');
+    useEffect(() => {
+        const root = document.documentElement;
+        const observer = new MutationObserver(() => {
+            const isDarkMode = root.classList.contains('dark');
+            setTheme(isDarkMode ? 'dark' : 'light');
+        });
 
+        observer.observe(root, { attributes: true, attributeFilter: ['class'] });
+
+        return () => observer.disconnect();
+    }, []);
     return (
         <>
             <div className='md:px-16 my-16 px-6'>
-
-                <Image src="/Icon.png" alt="SlateFlow" width={100} height={100} />
+                {
+                    theme==='dark' ? <Image src="/chalk.svg" alt="SlateFlow" width={50} height={100} /> : <Image src="/chalk-dark.svg" alt="SlateFlow" width={50} height={100} />
+                }
+                {/* <Image src="/Icon.png" alt="SlateFlow" width={100} height={100} /> */}
                 <div className='flex flex-col items-center mt-8'>
 
                     <h2 className='font-bold text-[40px] py-3'>What Should we call your team</h2>
