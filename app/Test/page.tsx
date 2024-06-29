@@ -7,7 +7,8 @@ import { TextRevealByWord } from '../_Components/Word-scroll';
 import Pricing from '../_Components/Pricing';
 import { Footer } from '../_Components/Footer';
 import Image from 'next/image';
-
+import Show from '@/public/Show.png'
+import ShowL from '@/public/Show-light.png'
 const LandingPage: React.FC = () => {
     const [expanded, setExpanded] = useState(false);
     const [theme, setTheme] = useState('light');
@@ -40,7 +41,7 @@ const LandingPage: React.FC = () => {
                         <h1 className="mt-5 text-4xl font-bold leading-tight sm:leading-tight sm:text-5xl dark:text-gray-100 text-neutral-700 lg:text-6xl lg:leading-tight font-pj">
                             Unleash Your Creativity,Document
                             <span className="relative inline-flex sm:inline">
-                                <span className="bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] blur-lg filter opacity-30 w-full h-full absolute inset-0 z-10"></span>
+                                <span className="bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] blur-lg filter opacity-30 w-full h-full absolute inset-0"></span>
                                 <span className="relative"> Seamlessly. </span>
                             </span>
                         </h1>
@@ -68,9 +69,9 @@ const LandingPage: React.FC = () => {
                         <div className="relative mx-auto overflow-hidden flex justify-center">
                             <div className="lg:max-w-5xl md:mx-auto lg:mx-auto">
                                 {theme === 'dark' ? (
-                                    <Image src="/show.png" alt="" width={1000} height={600} loading="lazy" />
+                                    <Image src={Show} alt="" width={1000} height={600} loading="lazy" />
                                 ) : (
-                                    <Image src="/show-light.png" alt="" loading="lazy" width={1000} height={600} />
+                                    <Image src={ShowL}alt="" loading="lazy" width={1000} height={600} />
                                 )}
                             </div>
                         </div>
